@@ -1,0 +1,709 @@
+/* static/style.css */
+:root {
+    --bg-main: #f0f2f5; /* Light gray main background */
+    --bg-sidebar: #ffffff; /* White sidebar background */
+    --bg-content: #f0f2f5; /* Light gray content background */
+    --bg-input-bar: #ffffff; /* White input bar background */
+    --bg-button: #007bff; /* Blue button - can be adjusted */
+    --bg-button-hover: #0056b3;
+    --bg-suggestion-card: #ffffff; /* White suggestion card */
+    --text-primary: #1c1e21; /* Dark gray for primary text */
+    --text-secondary: #606770; /* Medium-dark gray for secondary text */
+    --text-input: #1c1e21; /* Dark gray for input text */
+    --text-placeholder-label: #606770; /* For "输入您的需求..." */
+    --border-color: #ced4da; /* Lighter border color */
+    --accent-color: #007bff; /* Blue accent - can be adjusted */
+    --sidebar-item-hover-bg: #e9ecef; /* New: Sidebar item hover background */
+    --sidebar-item-selected-bg: #dde2e6; /* New: Sidebar item selected background */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative; /* Added for positioning toggle button */
+}
+
+#app-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    /* transition: all 0.5s ease-in-out; */
+}
+
+#sidebar {
+    width: 300px;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-width: 220px;
+    max-width: 350px;
+    box-sizing: border-box;
+    transition: margin-left 0.3s ease-in-out; /* Added for smooth animation */
+}
+#app-container.sidebar-collapsed #sidebar {
+    margin-left: -300px; /* Hide sidebar by moving it off-screen */
+    /* Ensure the width of the sidebar is accounted for if it's not fixed */
+    /* width: 300px; */ /* Or whatever your sidebar width is */
+}
+
+/* Styles for the toggle button */
+#sidebar-toggle {
+    position: fixed;
+    top: 1rem;
+    left: calc(300px - 3rem); /* Adjusted to give more space from the sidebar's right edge */
+    z-index: 1050;
+    background: var(--bg-input-bar);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: left 0.3s ease-in-out, transform 0.3s ease-in-out; /* Added transform for icon rotation */
+}
+/* Removed hover for sidebar-toggle */
+/* #sidebar-toggle:hover {
+    background-color: #30363d;
+} */
+
+#app-container.sidebar-collapsed #sidebar-toggle {
+    left: 1rem; /* Button moves to the left edge when sidebar is collapsed */
+}
+
+#sidebar-header {
+    padding: 1.5rem 1rem 1rem 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+}
+#chat-history-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 0.5rem;
+}
+.chat-history-item {
+    padding: 0.75rem 1rem; /* Keep padding for unselected items */
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.chat-history-item.selected {
+    background: var(--sidebar-item-selected-bg); /* Use new selected background */
+    /* padding: 0.75rem 1rem; Ensure padding is consistent or remove if truly no padding needed */
+    /* margin: 0.5rem 0; Ensure margin is consistent or remove if truly no margin needed */
+    font-weight: 600; /* Example: make selected item bold */
+}
+
+.chat-history-item:not(.selected):hover {
+    background: var(--sidebar-item-hover-bg); /* Use new hover background */
+}
+
+.chat-history-item > span, 
+.chat-history-item > div:first-child { /* Assuming text is in a span or the first div */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1; 
+    min-width: 0; 
+    margin-right: 12px; /* Increased from 8px */
+}
+
+.chat-history-item > button { /* Assuming the delete button is a direct child button */
+    flex-shrink: 0; 
+    /* Explicitly style the button for consistent appearance */
+    background: transparent;
+    border: none;
+    padding: 0.25rem; /* Small padding for clickability */
+    color: var(--text-secondary);
+    line-height: 1; /* Helps with icon alignment */
+    cursor: pointer;
+}
+
+#sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+#main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--bg-content);
+}
+#chat-area-wrapper, #chat-area {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: stretch;
+    align-items: stretch;
+}
+#chat-history {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 2rem 1rem 2rem;
+    background: none;
+    /* display: none; is handled by JS */
+}
+
+#app-container.initial-view {
+    /* Properties removed: justify-content: center; align-items: center; */
+    /* This class on app-container now primarily serves as a condition for descendant styles */
+}
+
+/* Added rule to center #chat-area within #chat-area-wrapper during initial view */
+#app-container.initial-view #chat-area-wrapper {
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for .center-welcome-block and its children, moved from inline */
+.center-welcome-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 400px;
+}
+
+.center-welcome-block img {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 1.5rem;
+    opacity: 0.92;
+}
+
+.welcome-greeting {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem; /* Adjusted from 0.5rem for better spacing with cards */
+}
+
+.example-prompts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 1rem; /* Adjusted from 2.5rem, as welcome-greeting margin increased */
+    margin-bottom: 1.5rem;
+}
+
+.example-prompt-card {
+    background-color: var(--bg-input-bar);
+    border: 1px solid var(--border-color);
+    border-radius: 0.6rem; /* Slightly more rounded */
+    padding: 1rem 1.25rem;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.example-prompt-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.example-prompt-card h4 {
+    font-size: 1rem; /* Slightly larger */
+    font-weight: 600; /* Semibold */
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+.example-prompt-card p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+#app-container.processing #chat-area {
+    width: 33.333333%;
+    max-width: none;
+    height: 100% !important;
+    border-radius: 0;
+}
+
+#app-container.initial-view #chat-area {
+    width: 90%;
+    max-width: 800px; /* Increased max-width for initial view */
+    height: auto;
+    min-height: 400px; /* Ensure it has some initial height */
+    max-height: 90vh;
+    padding-top: 2rem; /* More padding at the top for the new elements */
+}
+
+#content-area {
+    background-color: var(--bg-content);
+    transition: width 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+    width: 0;
+}
+
+#app-container.processing #content-area {
+    width: 66.666667%;
+    opacity: 1;
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: flex-end;
+    background-color: var(--bg-input-bar);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+    margin: 1.5rem 0.5rem 2rem 0.5rem;
+}
+ #app-container.processing .chat-input-container {
+    margin: 1rem; /* Smaller margin in processing view */
+}
+
+#user-input {
+    flex-grow: 1;
+    background-color: transparent;
+    color: var(--text-input);
+    border: none;
+    outline: none;
+    padding: 0.5rem 0;
+    width: 100%;
+    resize: none;
+    overflow-y: hidden;
+    line-height: 1.5;
+}
+
+.chat-input-container button {
+    background-color: var(--bg-button);
+    color: var(--text-primary); /* This might be overridden by #send-button specific color */
+    border-radius: 0.5rem;
+    padding: 0.625rem;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+}
+.chat-input-container button:hover {
+    background-color: var(--bg-button-hover);
+}
+
+#send-button {
+    color: #DDDDDD; /* Whitish-grey for the icon */
+}
+
+.message-wrapper {
+    display: flex;
+    align-items: flex-start; /* Aligns icon with top of bubble */
+    margin-bottom: 1rem; /* Increased margin slightly for better spacing */
+    position: relative;
+}
+
+.user-message-wrapper {
+    justify-content: flex-end; /* Aligns bubble and icon to the right */
+}
+
+.assistant-message-wrapper {
+    justify-content: flex-start; /* Aligns bubble and icon to the left */
+}
+
+.message {
+    /* display: flex; */ /* Flex is now on message-wrapper */
+    /* align-items: flex-start; */
+    padding: 0.6rem 0.9rem;
+    border-radius: 0.75rem;
+    max-width: 75%; /* Adjusted max-width slightly */
+    word-wrap: break-word;
+    /* margin-bottom: 0.75rem; */ /* Moved to message-wrapper */
+    /* position: relative; */ /* Moved to message-wrapper */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.message-icon {
+    width: 28px; /* Slightly smaller icon */
+    height: 28px; /* Slightly smaller icon */
+    border-radius: 50%;
+    flex-shrink: 0;
+    /* background-color: #f0f2f5; */ /* Removed background */
+    /* padding: 3px; */ /* Removed padding */
+    box-sizing: border-box;
+    margin-top: 2px; /* Add a small top margin to better align with first line of text */
+}
+
+.user-message-wrapper .message-icon {
+    margin-left: 10px; /* Increased space */
+    order: 1;
+}
+
+.assistant-message-wrapper .message-icon {
+    margin-right: 10px; /* Increased space */
+    order: -1;
+}
+
+.user-message {
+    background-color: var(--accent-color);
+    color: var(--text-primary); /* Consider a lighter color for text on accent bg */
+    align-self: flex-end;
+    margin-left: auto;
+}
+.assistant-message {
+    background-color: var(--bg-input-bar);
+    color: var(--text-primary);
+    align-self: flex-start;
+    margin-right: auto;
+}
+
+.browser-bar {
+    background-color: #161b22;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+}
+.browser-bar input {
+    background-color: var(--bg-input-bar);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+    border-radius: 0.25rem;
+}
+
+.loader {
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#crawled-content-display, #summary-content-display {
+    scrollbar-width: thin;
+    scrollbar-color: var(--bg-input-bar) var(--bg-sidebar);
+}
+#chat-history::-webkit-scrollbar,
+#crawled-content-display::-webkit-scrollbar,
+#summary-content-display::-webkit-scrollbar {
+    width: 8px;
+}
+#chat-history::-webkit-scrollbar-track,
+#crawled-content-display::-webkit-scrollbar-track,
+#summary-content-display::-webkit-scrollbar-track {
+    background: var(--bg-sidebar);
+}
+#chat-history::-webkit-scrollbar-thumb,
+#crawled-content-display::-webkit-scrollbar-thumb,
+#summary-content-display::-webkit-scrollbar-thumb {
+    background-color: var(--bg-input-bar);
+    border-radius: 10px;
+    border: 2px solid var(--bg-sidebar);
+}
+
+.content-display img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-input-bar);
+}
+.content-display h1, .content-display h2, .content-display h3 {
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+}
+.content-display h1 { font-size: 1.5em; font-weight: 600; margin-top: 1em; }
+.content-display h2 { font-size: 1.25em; font-weight: 600; margin-top: 0.8em; }
+.content-display h3 { font-size: 1.1em; font-weight: 600; margin-top: 0.7em; }
+
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: var(--accent-color);
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+hr {
+    border-color: var(--border-color);
+}
+
+/* Animation for initial view elements */
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.center-welcome-block img,
+.welcome-greeting,
+.example-prompt-card,
+#app-container.initial-view .chat-input-container {
+    opacity: 0; /* Start hidden */
+    animation: fadeInSlideUp 0.5s ease-out forwards;
+}
+
+.center-welcome-block img { animation-delay: 0.1s; }
+.welcome-greeting { animation-delay: 0.3s; }
+
+.example-prompts-container .example-prompt-card:nth-child(1) { animation-delay: 0.7s; }
+.example-prompts-container .example-prompt-card:nth-child(2) { animation-delay: 0.85s; }
+.example-prompts-container .example-prompt-card:nth-child(3) { animation-delay: 1.0s; }
+
+/* #app-container.initial-view .chat-input-container { animation-delay: 1.2s; } */
+
+/* Ensure no hover effect for new chat button, or a very subtle one if preferred */
+#new-chat-button {
+    /* existing styles */
+    /* remove or change hover background if needed */
+}
+#new-chat-button:hover {
+    background-color: transparent; /* Or a very light gray if some feedback is desired */
+    /* color: var(--text-primary); */ /* Keep text color or adjust as needed */
+}
+
+/* --- Markdown Content Styling --- */
+.assistant-message h1,
+.assistant-message h2,
+.assistant-message h3,
+.assistant-message h4,
+.assistant-message h5,
+.assistant-message h6 {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.assistant-message h1 { font-size: 1.5em; }
+.assistant-message h2 { font-size: 1.3em; }
+.assistant-message h3 { font-size: 1.15em; }
+
+.assistant-message p {
+    margin-bottom: 0.8em;
+    line-height: 1.6;
+}
+
+.assistant-message ul,
+.assistant-message ol {
+    margin-left: 1.5em;
+    margin-bottom: 0.8em;
+    padding-left: 0.5em; /* Ensure padding for markers */
+}
+
+.assistant-message ul {
+    list-style-type: disc;
+}
+
+.assistant-message ol {
+    list-style-type: decimal;
+}
+
+.assistant-message li {
+    margin-bottom: 0.3em;
+}
+
+.assistant-message strong,
+.assistant-message b {
+    font-weight: bold;
+}
+
+.assistant-message em,
+.assistant-message i {
+    font-style: italic;
+}
+
+.assistant-message pre {
+    background-color: #2d2d2d; /* Darker background for code blocks */
+    color: #f0f2f5; /* Light text for code blocks */
+    padding: 1em;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+    margin-bottom: 0.8em;
+    font-family: monospace;
+}
+
+.assistant-message code {
+    font-family: monospace;
+    background-color: rgba(135, 131, 120, 0.15);
+    color: #EB5757; /* A reddish color for inline code, adjust as needed */
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+}
+
+.assistant-message pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+    font-size: inherit; /* Code inside pre should inherit pre's font size */
+}
+
+.assistant-message blockquote {
+    border-left: 4px solid var(--border-color);
+    padding-left: 1em;
+    margin-left: 0;
+    margin-bottom: 0.8em;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.assistant-message table {
+    width: auto;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    border: 1px solid var(--border-color);
+}
+
+.assistant-message th,
+.assistant-message td {
+    border: 1px solid var(--border-color);
+    padding: 0.5em 0.75em;
+    text-align: left;
+}
+
+.assistant-message th {
+    background-color: var(--bg-input-bar);
+    font-weight: bold;
+}
+
+.assistant-message hr {
+    border-top: 1px solid var(--border-color);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+/* --- Thinking Animation --- */
+.thinking-animation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Align to the start of the message bubble */
+    padding: 10px 0; /* Adjust padding as needed, top/bottom only */
+    min-height: 2.5em; /* Ensure it has some height */
+}
+
+.thinking-animation span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin: 0 3px; /* Space out the dots */
+    background-color: var(--text-secondary);
+    border-radius: 50%;
+    animation: thinking-blink 1.4s infinite both;
+}
+
+.thinking-animation span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.thinking-animation span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.thinking-animation span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes thinking-blink {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1.0);
+        opacity: 1;
+    }
+}
+
+/* --- Product View Mode Styles --- */
+#app-container.product-view-active #sidebar {
+    margin-left: -300px; /* Effectively hide sidebar */
+}
+
+#app-container.product-view-active #sidebar-toggle {
+    left: 1rem; /* Move toggle button to far left */
+    /* Optionally hide it completely if not needed in this mode */
+    /* display: none; */ 
+}
+
+#app-container.product-view-active #main-content {
+    flex-direction: row; /* Arrange chat and browser side-by-side */
+}
+
+#app-container.product-view-active #chat-area-wrapper {
+    width: 40%; /* Chat area takes up 40% of main content */
+    max-width: 500px; /* Optional: max width for chat area */
+    height: 100vh; /* Full height */
+    border-right: 1px solid var(--border-color);
+}
+
+#app-container.product-view-active #chat-area {
+    width: 100%; /* Chat area internal width */
+}
+
+#app-container.product-view-active #browser-view-container {
+    display: flex; /* Show browser view */
+    width: 60%;    /* Browser view takes up 60% */
+    height: 100vh; /* Full height */
+}
+
+/* Styling for the dynamically added crawling status message */
+.crawling-status-message {
+    padding: 0.5rem 0.75rem;
+    /* background-color: rgba(var(--bg-input-bar-rgb), 0.5); /* Slightly different background */
+    /* border-top: 1px solid var(--border-color); */
+    margin-top: 8px; /* Space from message content */
+}
+
+.loader-small {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--text-secondary);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Ensure message content wrapper is present */
+.message .message-content {
+    /* Removed padding as it's now on .message */
+    flex-grow: 1; /* Allow content to take remaining space */
+}
+
+/* Hide normal welcome block when product view is active and chat has messages */
+#app-container.product-view-active .center-welcome-block {
+    display: none;
+}
+
+/* Ensure chat history is visible in product view mode if it was hidden */
+#app-container.product-view-active #chat-history {
+    display: block !important; 
+} 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能助手 Agent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark">
+
+    <div id="app-container">
+        <button id="sidebar-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 1.25rem; height: 1.25rem;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+        <div id="sidebar">
+            <div id="sidebar-header">
+                <button id="new-chat-button" class="w-full text-left p-2 mb-2 rounded hover:bg-gray-700 focus:outline-none">
+                    + 新建对话
+                </button>
+            </div>
+            <div id="chat-history-list" class="overflow-y-auto flex-grow">
+                <!-- 历史对话记录将由 JavaScript 动态填充 -->
+            </div>
+            <div id="sidebar-footer">by SigmAILab</div>
+        </div>
+        <div id="main-content">
+            <div id="chat-area-wrapper">
+                <div id="chat-area" class="flex flex-col p-0">
+                    <div class="center-welcome-block"> 
+                        <img src="/static/images/sigma.png" alt="SIGMA Logo" /> 
+                        <div class="welcome-greeting">👋 今天我可以帮你什么？</div>
+                        
+                        <div class="example-prompts-container">
+                            <div class="example-prompt-card" data-prompt="我的产品是熨烫机，上架的淘宝平台，需要制作10屏详情页，需要体现科技风格和长续航、多功能卖点。">
+                                <h4>熨烫机详情页设计</h4>
+                                <p>淘宝，10屏，科技风，长续航，多功能</p>
+                            </div>
+                            <div class="example-prompt-card" data-prompt="我们新推出一款电风扇，目标用户是年轻白领，希望在淘宝上进行推广，请策划营销文案和视觉素材方向。">
+                                <h4>电风扇营销策划</h4>
+                                <p>淘宝推广，年轻白领，文案与视觉</p>
+                            </div>
+                            <div class="example-prompt-card" data-prompt="我正在设计一款在亚马逊上架的电暖器的科技风详情页。">
+                                <h4>电暖器详情页设计</h4>
+                                <p>亚马逊，科技风，电暖器</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chat-history" class="space-y-2 bg-black/10" style="display:none;"></div>
+                    <div class="chat-input-container">
+                        <textarea id="user-input" class="modern-input" placeholder="点击下方卡片，或在此输入您的详细需求..." rows="1"></textarea>
+                        <button id="send-button" class="modern-send-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                            </svg>
+                        </button>
+                        <button id="stop-button" class="modern-send-btn" style="display:none; background-color: #ef4444; margin-left: 5px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 7.5A2.25 2.25 0 017.5 5.25h9a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25h-9a2.25 2.25 0 01-2.25-2.25v-9z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- New Browser View Area -->
+            <div id="browser-view-container" class="hidden flex-col flex-grow">
+                <div class="browser-bar p-2 bg-gray-100 border-b border-gray-300 dark:bg-gray-700 dark:border-gray-600">
+                    <input type="text" id="browser-url-display" class="w-full p-1 border rounded bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-50" readonly value="抓取内容预览">
+                </div>
+                <div id="browser-view-content" class="flex-grow p-4 overflow-y-auto bg-white dark:bg-gray-800">
+                    <!-- Crawled content or product details will be loaded here -->
+                    <p class="text-gray-500 dark:text-gray-400">正在等待内容加载...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
