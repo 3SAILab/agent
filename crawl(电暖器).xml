@@ -1,0 +1,109 @@
+<root>
+    <think>
+        好的，我现在需要帮用户设计一个淘宝电暖器的12屏详情页，要求科技风，突出长续航和多功能卖点。首先，我需要结合我搜索到的资料来规划每一屏的内容和设计元素。
+        根据[6]，详情页通常分为10-15屏，每屏类似海报设计，前三屏最关键。[2]提到FABE法则，即特性、优势、利益、证据，可以用来构建逻辑。[6]也强调首屏的重要性，需要吸引用户继续浏览。
+        科技风的视觉方面，[3]提到使用蓝色、渐变故障风、几何元素等。[9]建议深蓝色背景传递科技感，而[12]提到冬季产品可用红色体现温暖，但需要平衡科技感。[8]中的案例使用黑色背景搭配蓝青色光效，显得科技感强，可以借鉴。
+        长续航卖点方面，[7]和[13]都提到长续航的重要性，[13]中的电暖器使用PTC陶瓷发热体高效发热，可以强调技术参数和续航时间。[15]和[18]的现代设计中的显示屏和控制按钮，可以展示智能功能和续航显示。
+        多功能卖点需要突出，比如[18]的多个控制按钮和显示屏，[19]的定时功能，[13]的倾倒保护和过热保护。[16]提到用C4D渲染提升视觉效果，但需注意逻辑清晰，避免信息混乱。
+        设计结构上，[14]的分屏海报设计建议前三屏抓眼球，首屏展示促销和核心卖点。[17]有科技风对比模块和专利证书展示，适合后几屏。[11]的数码电器案例可参考排版。
+        颜色方面，结合[3]的蓝色、[8]的黑色+蓝青、[9]的深蓝科技感，主色调选深蓝或黑色，搭配银色、青色光效。红色点缀可突出温暖，但不过多以免冲突。
+    </think>
+
+    <answer>
+        # 🔥 电暖器科技风详情页设计（12屏方案）
+
+        - **📝 文案**：  
+        🔴 `限时直降`标签 + **"智能长续航·全屋速暖"**  
+        ⚡ 副标题："72小时超长续航｜6大智能模式" [2][6][9]  
+        - **🎯 参考**：[9]深蓝色调 + [16]的C4D建模  
+
+        ## 📱 第二屏：产品外观与设计理念
+        - **🖼️ 设计**：  
+        `左右分栏布局` ←[全面屏触控面板实拍] →[极简线框材质标注]  
+        ✨ *亮点*：航空铝合金框架高光特写 [1][18]  
+        - **✍️ 文案**：  
+        **"全面屏设计语言·无缝融入现代家居"**  
+        📐 小字标注："8mm超薄机身 | 耐800℃高温" [13][15]  
+
+        ## 🔋 第三屏：长续航技术解析
+        - **⚙️ 设计**：  
+        `蓝青色光晕背景` + 动态`72h`数字 + 对比柱状图 [7][8]  
+        🔋 *技术可视化*：电池剖视图展示2000mAh电芯  
+        - **📊 文案**：  
+        **"ECO节能算法·告别频繁充电"**  
+
+        🏠 *场景*：浴室/卧室/客厅3D渲染 [15][19]  
+        - **📌 文案**：  
+        **"一机六用·智慧取暖矩阵"**  
+        🔒 安全标注："IPX4防水 | 倾倒自动断电" [13][16]  
+
+        ## ⚠️ 第五屏：安全性能与认证
+        - **🛡️ 设计**：  
+        `黑金警示色背景` + 爆炸图分解安全结构 [13][17]  
+        📜 *认证展示*：3C证书悬浮窗 + 温度传感器特写  
+        - **🔐 文案**：  
+        **"双金属片过热保护·12重安全防护"**  
+        ❤️ 情感化表达："守护有宝宝的家庭"  
+
+        ## 🏆 第六屏：竞品对比
+        - **📉 设计**：  
+        `红绿对比表格` + 本品✔️ vs 竞品❌ [17]  
+        💎 *核心优势*：用钻石图标突出"72h续航"  
+        - **💯 文案**：  
+        **"长续航+智能控温=性价比之王"**  
+        📌 小字："实测数据来源于XX实验室" [16]  
+
+        ## 🎁 第十一屏：促销转化
+        - **💰 设计**：  
+        `动态倒计时` + 爆炸礼盒动画赠品 [2][10]  
+        🛒 *按钮设计*："立即抢购"脉冲光效  
+        - **🛍️ 文案**：  
+        **"前100名赠防尘罩+温控插座"**  
+        ⏳ 紧迫感营造："库存仅剩23%" [6][12]  
+
+        ## 🎨 整体设计规范
+        | 要素 | 规范 | 参考 |
+        |------|------|------|
+        | 🎨 主色调 | `#0F4C75`科技蓝 + `#E6E8EC`金属银 | [3][9] |
+        | ✍️ 字体 | 标题：阿里普惠体Bold | [11][16] |
+        | ✨ 动效 | 首屏3D旋转 + 参数数字滚动 | [20] |
+        | 📱 适配 | 重点区域安全宽度≥750px | [1][14] |
+        <related_events>
+            <event><name>现代电暖器设计展示</name><time>2025</time><summary>展示了多款现代风格的电暖器，强调其时尚设计和科技感。</summary><type>产品设计</type></event>
+            <event><name>电商科技风素材发布</name><time>2024-05-21</time><summary>介绍了多种适用于电商领域的科技风格背景图片和设计元素。</summary><type>设计资源</type></event>
+            <event><name>淘宝天猫电器详情页设计分享</name><time>2025-03-19</time><summary>分享了淘宝天猫电器产品的多样详情页设计案例。</summary><type>电商设计</type></event>
+            <event><name>电商详情页设计灵感与创意素材分享</name><time>2025-03-19</time><summary>分享了多个不同产品类别的电商详情页设计案例。</summary><type>电商设计</type></event>
+            <event><name>AI创作详情页指南发布</name><time>2024-08-05</time><summary>介绍了如何使用AI技术创作电商详情页的指南。</summary><type>技术应用</type></event>
+        </related_events>
+        <related_organizations>
+            <organization><name>淘宝天猫</name><summary>中国领先的电商平台，提供各类商品交易服务。</summary><type>电商/零售</type></organization>
+            <organization><name>狼牙创意网</name><summary>提供设计灵感图库和创意素材的网站。</summary><type>设计/创意资源</type></organization>
+            <organization><name>潮国创意</name><summary>专注于提供3D设计和创意解决方案的公司，拥有丰富的设计资源和案例。</summary><type>设计/创意解决方案</type></organization>
+        </related_organizations>
+        <related_persons>
+            <person><name>Jacky-chen</name><summary>分享了一系列电商详情页设计案例的用户。</summary><type>设计师/内容分享者</type></person>
+        </related_persons>
+    </answer>
+
+    <reference>
+        <item>1. 社群营销 https://2504.qiangtu.com:8088/download/1060/pdf/1060.pdf</item>
+        <item>2. 电商科技风素材 [2024-05-21] https://www.51yuansu.com/tupian/dianshangkejifeng-0-0-0-0-2/</item>
+        <item>3. 淘宝天猫电器详情页设计 [2025-03-19] https://m.huaban.com/boards/34484755</item>
+        <item>4. 电商详情页设计灵感与创意素材 [2025-03-19] https://m.huaban.com/boards/31052943/</item>
+        <item>5. 项目一 视觉表现 https://www.dflyy.com/upload/files/2022/1/131b60e25a0678df.pdf</item>
+        <item>6. 如何用AI创作详情页 [2024-08-05] http://www.tsxnews.com.cn/2024falv/aitong/121491.html</item>
+        <item>7. 零基础的淘宝美工进阶教程 [2018-05-05] https://www.sohu.com/a/230534848_100158446</item>
+        <item>8. 淘宝商品详情页如何制作的更加优秀？ [2019-07-27] http://www.taofake.com.cn/article/wangdianseo/6381.html</item>
+        <item>9. 天猫上市整体规划 [2015-01-25] https://www.doc88.com/p-3157554331416.html</item>
+        <item>10. 淘宝天猫详情页设计与创意 [2025-03-11] https://m.huaban.com/boards/39569939/</item>
+        <item>11. 淘宝详情页装修指南 [2023-01-30] https://www.musicheng.com/news/i222011.html</item>
+        <item>12. 双十二入手小家电推荐 [2021-11-30] https://www.zhihu.com/question/502434693/answer/2250464991</item>
+        <item>13. 2023版人才培养方案 数字媒体艺术专业课程教学大纲（1-8学期） http://cd.dgcu.edu.cn/attached/file/20240416/20240416195523_12587.pdf</item>
+        <item>14. ATC Sun Ray RF Electric Thermal Radiators Experience Unique https://www.atc.ie/wp-content/uploads/ATC-Sun-Ray-RF-Thermal-Electric-Radiator-4.pdf</item>
+        <item>15. 电商设计详情页如何设计能拿高薪 [2021-10-19] https://www.sohu.com/a/495991202_120076109</item>
+        <item>16. 资产详情页 [2025-05-08] https://chaopx.com/tupian/zichanxiangqingye.html</item>
+        <item>17. 产品改良设计 https://www.wyu.edu.cn/__local/1/45/D3/21CE85DBC32A1BFD7295AC1C969_3C61A718_24DF75.pdf</item>
+        <item>18. JEDINÝ ČESKÝ B2B MAGAZÍN O TRHU S DOMÁCÍMI SPOTŘEBIČI – 15 LET NA TRHU https://www.sellmag.cz/jpg/files/1477_Czech Sell_190-FINAL-WEB--preview.pdf</item>
+        <item>19. 3D科技场景 [2024-09-24] https://chaopx.com/collection/781.html</item>
+    </reference>
+</root>
